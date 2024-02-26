@@ -3,6 +3,8 @@
 		"fractol.h": "c",
 		"math.h": "c",
 		"mlx.h": "c",
-		"mlx_int.h": "c"
+		"mlx_int.h": "c",
+		"*.tcc": "c",
+		"random": "c"
 	}
 }

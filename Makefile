@@ -5,21 +5,26 @@ minilibx = ./minilibx-linux-master
 mlx = $(minilibx)/libmlx_Linux.a
 CC = cc
 SRC = fractol.c \
-	fractol_utils.c 
+	fractol_utils.c \
+	colors.c \
+	calcul.c \
+	hook.c 
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 DEPS = $(OBJ:.o=.d)
 
-all: $(OBJ_DIR) libft minilibx $(NAME)
+FRACTOL_COMPILED := $(NAME)
+
+all: $(OBJ_DIR) libft $(FRACTOL_COMPILED)
 
 $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $< -I$(libft) -I$(minilibx)
 
 -include $(DEPS)
 
-$(NAME): $(OBJ) libft minilibx
-	$(CC) $(CFLAGS) -L$(minilibx) -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME) $(OBJ) -L$(libft) -lft $(mlx)
+$(FRACTOL_COMPILED): $(OBJ) libft $(mlx)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L$(libft) -lft $(mlx) -L$(minilibx) -L/usr/lib -lXext -lX11 -lm -lz
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
@@ -27,7 +32,7 @@ $(OBJ_DIR):
 libft:
 	make -C $(libft)
 
-minilibx:
+$(mlx):
 	make -C $(minilibx)
 
 clean:
@@ -41,4 +46,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re libft minilibx
+.PHONY: all clean fclean re libft
