@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzuccare <vzuccare@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:03:23 by vzuccare          #+#    #+#             */
-/*   Updated: 2024/02/26 15:21:49 by vzuccare         ###   ########lyon.fr   */
+/*   Updated: 2024/02/26 21:31:27 by vincent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,16 @@ void	full_screen(t_fract *f)
 	int			color;
 
 	y = -1;
+	color = 0x00000000;
 	while (++y < HEIGHT)
 	{
 		x = -1;
 		while (++x < WIDTH)
 		{
-			color = mandelbrot(f, x, y);
+			if (ft_strncmp(f->name, "julia", 5) == 0)
+				color = julia(f, x, y);
+			else if (ft_strncmp(f->name, "mandelbrot", 5) == 0)
+				color = mandelbrot(f, x, y);
 			put_pixel(f, x, y, color);
 		}
 	}

@@ -14,13 +14,11 @@
 
 void	init_fractol(t_fract *f)
 {
-	f->x = 0;
-	f->y = 0;
-	f->color = 0;
-	f->max_iter = 500;
+
+	f->max_iter = 30;
 	f->zoom = 1;
 	f->colors = (t_color *)malloc(sizeof(t_color) * 256);
-	f->colors->color = 125;
+	f->colors->color = 0x00000000;
 	f->mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	f->mlx->mlx = mlx_init();
 	f->mlx->win = mlx_new_window(f->mlx->mlx, \

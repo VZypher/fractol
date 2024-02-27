@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzuccare <vzuccare@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:03:17 by vzuccare          #+#    #+#             */
-/*   Updated: 2024/02/26 15:24:37 by vzuccare         ###   ########lyon.fr   */
+/*   Updated: 2024/02/26 21:18:30 by vincent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct s_frac
 	char		*name;
 	int			x;
 	int			y;
-	int			color;
 	int			max_iter;
 	double		zoom;
 	t_complex	*c;
@@ -73,6 +72,7 @@ int		get_b(int trgb);
 int		get_color(int trgb, double t);
 void	ft_parse_args(int ac, char **av, t_fract *f);
 int		mandelbrot(t_fract *f, int x, int y);
+int		julia(t_fract *f, int x, int y);
 void	hook_events(t_fract *f);
 void	free_fractol(t_fract *f);
 #endif
