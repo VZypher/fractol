@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   fractol_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vzuccare <vzuccare@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:03:23 by vzuccare          #+#    #+#             */
-/*   Updated: 2024/02/26 21:31:27 by vincent          ###   ########.fr       */
+/*   Updated: 2024/02/27 17:33:10 by vzuccare         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int	orange_color(double i, double max_iter)
+{
+	int	red;
+	int	green;
+
+	red = (int)(180 + 75 * sin(3.14 * i / max_iter));
+	green = (int)(64 + 63 * sin(3.14 * i / max_iter));
+	return (create_trgb(0, red, green, 0));
+}
 
 int	get_color(int trgb, double t)
 {
@@ -31,20 +41,24 @@ void	full_screen(t_fract *f)
 {
 	int			x;
 	int			y;
-	int			color;
 
+	f->mlx->img = mlx_new_image(f->mlx->mlx, HEIGHT, WIDTH);
+	f->mlx->addr = mlx_get_data_addr(f->mlx->img, \
+		&f->mlx->bits_per_pixel, &f->mlx->size_line, &f->mlx->endian);
+	if (!f->mlx->addr || !f->mlx->img || !f->mlx->bits_per_pixel)
+		free_fractol(f);
 	y = -1;
-	color = 0x00000000;
 	while (++y < HEIGHT)
 	{
 		x = -1;
 		while (++x < WIDTH)
 		{
 			if (ft_strncmp(f->name, "julia", 5) == 0)
-				color = julia(f, x, y);
+				put_pixel(f, x, y, julia(f, x, y));
 			else if (ft_strncmp(f->name, "mandelbrot", 5) == 0)
-				color = mandelbrot(f, x, y);
-			put_pixel(f, x, y, color);
+				put_pixel(f, x, y, mandelbrot(f, x, y));
+			else if (ft_strncmp(f->name, "burning_ship", 5) == 0)
+				put_pixel(f, x, y, burning_ship(f, x, y));
 		}
 	}
 }

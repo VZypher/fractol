@@ -7,7 +7,7 @@ CC = cc
 SRC = fractol.c \
 	fractol_utils.c \
 	colors.c \
-	calcul.c \
+	math.c \
 	hook.c 
 
 OBJ_DIR = obj
