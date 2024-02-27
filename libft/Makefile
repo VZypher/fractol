@@ -49,10 +49,8 @@ DEPS = $(addprefix $(OBJ_DIR)/, $(OBJ:.o=.d))
 
 all: $(OBJ_DIR) $(DEPS_DIR) $(NAME)
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: %.c libft.h | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -o $@ -c $<
-
--include $(DEPS)
 
 $(NAME): $(OBJ)
 	ar crs $(NAME) $(OBJ)
