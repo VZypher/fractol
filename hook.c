@@ -6,52 +6,68 @@
 /*   By: vzuccare <vzuccare@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:20:54 by vzuccare          #+#    #+#             */
-/*   Updated: 2024/02/27 17:28:28 by vzuccare         ###   ########lyon.fr   */
+/*   Updated: 2024/03/01 10:06:14 by vzuccare         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	key_hook(int keycode, void *param)
+void	handle_julia_keys(int keycode, t_fract *fract)
+{
+	if (keycode == 65451 && ft_strncmp(fract->name, "julia", 5) == 0)
+	{
+		fract->j->re += 0.1;
+		fract->j->im += 0.1;
+	}
+	if (keycode == 65453 && ft_strncmp(fract->name, "julia", 5) == 0)
+	{
+		fract->j->re -= 0.1;
+		fract->j->im -= 0.1;
+	}
+}
+
+int	key_hook(int keycode, void *p)
 {
 	if (keycode == 65307)
-		free_fractol((t_fract *)param);
+	{
+		mlx_destroy_image(((t_fract *)p)->mlx->mlx, ((t_fract *)p)->mlx->img);
+		free_fractol((t_fract *)p);
+	}
 	if (keycode == 32)
 	{
-		((t_fract *)param)->x = 0;
-		((t_fract *)param)->y = 0;
-		((t_fract *)param)->zoom = 1;
+		((t_fract *)p)->x = 0;
+		((t_fract *)p)->y = 0;
+		((t_fract *)p)->zoom = 1;
 	}
 	if (keycode == 65362 || keycode == 119)
-		((t_fract *)param)->y -= 170 / ((t_fract *)param)->zoom;
+		((t_fract *)p)->y -= 10 * ((t_fract *)p)->zoom;
 	if (keycode == 65364 || keycode == 115)
-		((t_fract *)param)->y += 170 / ((t_fract *)param)->zoom;
+		((t_fract *)p)->y += 10 * ((t_fract *)p)->zoom;
 	if (keycode == 65361 || keycode == 97)
-		((t_fract *)param)->x -= 170 / ((t_fract *)param)->zoom;
+		((t_fract *)p)->x -= 10 *((t_fract *)p)->zoom;
 	if (keycode == 65363 || keycode == 100)
-		((t_fract *)param)->x += 170 / ((t_fract *)param)->zoom;
-	mlx_destroy_image(((t_fract *)param)->mlx->mlx, \
-		((t_fract *)param)->mlx->img);
-	full_screen((t_fract *)param);
-	mlx_put_image_to_window(((t_fract *)param)->mlx->mlx, \
-		((t_fract *)param)->mlx->win, ((t_fract *)param)->mlx->img, 0, 0);
+		((t_fract *)p)->x += 10 * ((t_fract *)p)->zoom;
+	handle_julia_keys(keycode, (t_fract *)p);
+	mlx_destroy_image(((t_fract *)p)->mlx->mlx, ((t_fract *)p)->mlx->img);
+	full_screen((t_fract *)p, -1, -1);
+	mlx_put_image_to_window(((t_fract *)p)->mlx->mlx, \
+		((t_fract *)p)->mlx->win, ((t_fract *)p)->mlx->img, 0, 0);
 	return (0);
 }
 
-int	mouse_scroll(int scroll, int x, int y, void *param)
+int	mouse_scroll(int scroll, int x, int y, void *p)
 {
 	(void)x;
 	(void)y;
 	if (scroll == 4)
-		((t_fract *)param)->zoom *= 1.1;
+		((t_fract *)p)->zoom *= 1.1;
 	else if (scroll == 5)
-		((t_fract *)param)->zoom /= 1.1;
-	if (((t_fract *)param)->mlx->img)
-		mlx_destroy_image(((t_fract *)param)->mlx->mlx, \
-			((t_fract *)param)->mlx->img);
-	full_screen((t_fract *)param);
-	mlx_put_image_to_window(((t_fract *)param)->mlx->mlx, \
-		((t_fract *)param)->mlx->win, ((t_fract *)param)->mlx->img, 0, 0);
+		((t_fract *)p)->zoom /= 1.1;
+	if (((t_fract *)p)->mlx->img)
+		mlx_destroy_image(((t_fract *)p)->mlx->mlx, ((t_fract *)p)->mlx->img);
+	full_screen((t_fract *)p, -1, -1);
+	mlx_put_image_to_window(((t_fract *)p)->mlx->mlx, \
+		((t_fract *)p)->mlx->win, ((t_fract *)p)->mlx->img, 0, 0);
 	return (0);
 }
 

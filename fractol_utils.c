@@ -6,7 +6,7 @@
 /*   By: vzuccare <vzuccare@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:03:23 by vzuccare          #+#    #+#             */
-/*   Updated: 2024/02/27 17:33:10 by vzuccare         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 12:08:07 by vzuccare         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,18 @@ void	put_pixel(t_fract *f, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	full_screen(t_fract *f)
+void	full_screen(t_fract *f, int x, int y)
 {
-	int			x;
-	int			y;
-
-	f->mlx->img = mlx_new_image(f->mlx->mlx, HEIGHT, WIDTH);
-	f->mlx->addr = mlx_get_data_addr(f->mlx->img, \
-		&f->mlx->bits_per_pixel, &f->mlx->size_line, &f->mlx->endian);
-	if (!f->mlx->addr || !f->mlx->img || !f->mlx->bits_per_pixel)
+	f->mlx->img = mlx_new_image(f->mlx->mlx, WIDTH, HEIGHT);
+	if (!f->mlx->img)
 		free_fractol(f);
+	f->mlx->addr = mlx_get_data_addr(f->mlx->img, &f->mlx->bits_per_pixel, \
+		&f->mlx->size_line, &f->mlx->endian);
+	if (!f->mlx->addr)
+	{
+		mlx_destroy_image(f->mlx->mlx, f->mlx->img);
+		free_fractol(f);
+	}
 	y = -1;
 	while (++y < HEIGHT)
 	{

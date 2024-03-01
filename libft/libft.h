@@ -6,7 +6,7 @@
 /*   By: vzuccare <vzuccare@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 14:25:31 by vzuccare          #+#    #+#             */
-/*   Updated: 2024/02/26 15:40:17 by vzuccare         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 12:50:45 by vzuccare         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char			*ft_strnstr(const char *s1, const char *s2, size_t	len );
 char			*ft_strrchr( const char *string, int searchedChar );
 char			*ft_substr(char const *s, size_t start, size_t len);
 int				ft_tolower(int character);
+char			*ft_tolower_str(char *str);
 int				ft_toupper( int character );
 size_t			ft_strlen(const char *s);
 char			*ft_strtrim(char const *s1, char const *set);

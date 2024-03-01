@@ -6,6 +6,7 @@
 		"mlx_int.h": "c",
 		"*.tcc": "c",
 		"random": "c",
-		"fcntl.h": "c"
+		"fcntl.h": "c",
+		"libft.h": "c"
 	}
 }
