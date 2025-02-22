@@ -39,9 +39,11 @@ Fractol is a graphical application that allows users to explore fractal images. 
 - **\***: Increase imaginary values ​​for Julia
 - **/**: Decrease imaginary values for Julia 
 
-- **fractol.h**: Header file containing necessary includes and function prototypes.
 
 ### Screenshots
-![Screenshot from 2025-02-22 04-30-34](https://github.com/user-attachments/assets/a494e491-4c9d-4dd7-a774-d3352c578913)
-![Screenshot from 2025-02-22 04-32-24](https://github.com/user-attachments/assets/f870b718-e8bf-45d0-8896-2f103b1a7650)
-![Screenshot from 2025-02-22 04-32-45](https://github.com/user-attachments/assets/ec87e3c2-13c4-41ed-94af-0ed6da6b35c1)
+
+![Screenshot from 2025-02-22 04-43-59](https://github.com/user-attachments/assets/86e333e7-3be9-4f8a-acbd-dd93a45b4dfe)
+
+![Screenshot from 2025-02-22 04-44-28](https://github.com/user-attachments/assets/f3af27ac-cddd-4a45-8b2f-328fe7b3f33a)
+
+![Screenshot from 2025-02-22 04-44-47](https://github.com/user-attachments/assets/9a3a7c5b-3c6a-47ba-ae64-4965f919799d)
